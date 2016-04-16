@@ -1,0 +1,95 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[margin=1.5in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amsthm, amssymb, amsbsy}
+\usepackage{adjustbox}
+\usepackage{multirow}
+\usepackage{color}
+\usepackage{framed}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{epstopdf}
+\usepackage{cite}
+\usepackage{authblk}
+\usepackage{microtype}
+\usepackage{hyperref}
+\usepackage{cleveref}
+
+\title{Mixed problems}
+\author{Daniel Alves Paladim, Elena Atroshenko}
+\date{\today}
+
+\pdfinfo{%
+  /Title    ()
+  /Author   ()
+  /Creator  ()
+  /Producer ()
+  /Subject  ()
+  /Keywords ()
+}
+
+\begin{document}
+\maketitle
+  In these notes, we consider the following abstract problem: Find $u \in V$ and $p \in \Pi$ such that
+  \begin{align}
+    a(u,v)+ b(v,p) &= F(v) \quad &&\forall v \in V \label{eq:main}\\
+            b(u,q) &= 0    \quad &&\forall q \in \Pi \label{eq:constraint}
+  \end{align}
+  where we assume all forms to be continuous in their respective spaces. This problem can represent the Stokes problem or a two field formulation of diffusion problem. For the Stokes problem:
+  \begin{gather*}
+   a(u,v) =  \int_\Omega \nabla u \cdot \nabla v \,d\Omega \\
+   b(v,q) = -\int_\Omega \nabla \cdot v q \,d\Omega \\
+   V = H^1_0(\Omega) \\
+   \Pi = \{q \in L^2(\Omega) \,| \int_\Omega q \,d\Omega = 0  \}
+  \end{gather*}
+  The ``proof'' that these problems have a solution is done in two parts. Firstly, we consider a subspace where the second equation is already fulfilled,
+  \begin{equation}
+   Z = \{u \in V \,| b(u,q) = 0 \, \forall q \in \Pi\}
+  \end{equation}
+  Hence, in this subspace the problem is reduced to: Find $u \in Z$ such that
+  \begin{equation}
+   a(u,v) = F(v) \quad \forall v \in Z
+  \end{equation}
+  Provided that $Z$ is closed (and hence complete) and $a(\cdot,\cdot)$ is $V$-coercive, the Lax-Milgram theorem establishes the well-posedness of the problem.
+  
+  The problem for $p$ is reduced to: Find $p \in \Pi$ such that,
+  \begin{equation}
+   b(v,p) = F(v) - a(u,v) \quad \forall v \in V
+  \end{equation}
+  and in particular, we can replace $V$ by $Z^\perp$, since $v \in Z$ implies $b(v,p) = 0$.
+  
+  The Babuska-Lax-Milgram theorem (Lemma 12.2.12 in \cite{}) proves the well posedness of this provided, the following condition holds
+  \begin{equation}
+   \exists \beta > 0,\quad \beta \|q\|_\Pi \leq \sup_{v \in V/\{0\}} \frac{b(v,q)}{\|v\|_V} \forall q \in \Pi
+  \end{equation}
+  sometimes called weak-coercivity and loosely speaking the continuum equivalent of the $\inf$-$\sup$-condition.
+  
+  In particular, for the Stokes problem, the proof of the weakly coercivity relies on Lemma 3.2 (\cite{}) which states that the divergence is an isomorphism between $Z^\perp$ and $\Pi$, i.e. `` $\nabla \cdot v =p$ has a solution $v$ in $Z^\perp$ for each $p$ in $\Pi$'' \footnote{The idea of the proof is to solve a Poisson problem with $p$ being forcing term and then set $v= \nabla w$, where $w$ is the solution of the latter.}. Furthermore, there is a constant $C$ such that
+  \begin{equation}
+   \|v\|_V \leq C \|p\|_\Pi
+  \end{equation}
+  With this result, the weak coercivity follows by setting $\beta = 1/C$,
+  \begin{equation}
+  \beta \|p\|_\Pi = \beta\frac{b(v,p)}{\|p\|_\Pi} \leq \frac{b(v,p)}{\|v\|_V}
+  \end{equation}
+  
+  \section*{FAQ}
+  \paragraph{What happens if $u$ is not homogeneous on the boundary?}
+  
+  We write $u = u_H + u_0$ where $u_0$ is a field that fulfills the Dirichlet boundary conditions and solve \cref{eq:main} for $u_H$ with an additional linear form,
+  \begin{equation}
+   a(u_H,v) + b(p,u_H) = F(v) - a(u_0,v) \quad \forall v \in V
+  \end{equation}
+
+  \paragraph{In the particular case of the Stokes problem, shouldn't the test space for the constraint \cref{eq:constraint}, be $L^2(\Omega)$? Aren't we under-constraining the velocity field $u$?}
+  No, we are not under-constraining $u$. In this particular case, if \cref{eq:constraint} holds for all $q$ in $\Pi$, it also holds for all $q$ in $L^2(\Omega)$. Indeed, for $q$ in $L^2(\Omega)$, we can decompose it $q = \bar{q}+\tilde{q}$ with
+  \begin{gather*}
+   \bar{q}   = \frac{1}{|\Omega|} \int_\Omega q \,d\Omega\\
+   \tilde{q} = q-\bar{q}
+  \end{gather*}
+  With this decomposition $\tilde{q} \in \Pi$ and therefore $b(u,q) = b(u,\bar{q})$. By applying the divergence theorem,
+  \begin{equation}
+   b(u,\bar{q}) = \int_\Omega \nabla \cdot u q \,d\Omega = \int_{\partial \Omega} q u \cdot n d\Gamma = 0
+  \end{equation}
+  since $u$ is homogeneous.
+\end{document}
