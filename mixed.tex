@@ -16,12 +16,12 @@
 \usepackage{cleveref}
 
 \title{Mixed problems}
-\author{Daniel Alves Paladim, Elena Atroshenko}
+\author{Daniel Alves Paladim, Elena Atroshchenko}
 \date{\today}
 
 \pdfinfo{%
-  /Title    ()
-  /Author   ()
+  /Title    (Mixed problems)
+  /Author   (Daniel Alves Paladim, Elene Atroshchenko)
   /Creator  ()
   /Producer ()
   /Subject  ()
@@ -58,13 +58,13 @@
   \end{equation}
   and in particular, we can replace $V$ by $Z^\perp$, since $v \in Z$ implies $b(v,p) = 0$.
   
-  The Babuska-Lax-Milgram theorem (Lemma 12.2.12 in \cite{}) proves the well posedness of this provided, the following condition holds
+  The Babuska-Lax-Milgram theorem (Lemma 12.2.12 in \cite{brenner2007mathematical}) proves the well posedness of this provided, the following condition holds
   \begin{equation}
    \exists \beta > 0,\quad \beta \|q\|_\Pi \leq \sup_{v \in V/\{0\}} \frac{b(v,q)}{\|v\|_V} \forall q \in \Pi
   \end{equation}
   sometimes called weak-coercivity and loosely speaking the continuum equivalent of the $\inf$-$\sup$-condition.
   
-  In particular, for the Stokes problem, the proof of the weakly coercivity relies on Lemma 3.2 (\cite{}) which states that the divergence is an isomorphism between $Z^\perp$ and $\Pi$, i.e. `` $\nabla \cdot v =p$ has a solution $v$ in $Z^\perp$ for each $p$ in $\Pi$'' \footnote{The idea of the proof is to solve a Poisson problem with $p$ being forcing term and then set $v= \nabla w$, where $w$ is the solution of the latter.}. Furthermore, there is a constant $C$ such that
+  In particular, for the Stokes problem, the proof of the weakly coercivity relies on Lemma 3.2 (\cite{girault2012finite}) which states that the divergence is an isomorphism between $Z^\perp$ and $\Pi$, i.e. `` $\nabla \cdot v =p$ has a solution $v$ in $Z^\perp$ for each $p$ in $\Pi$'' \footnote{The idea of the proof is to solve a Poisson problem with $p$ being forcing term and then set $v= \nabla w$, where $w$ is the solution of the latter.}. Furthermore, there is a constant $C$ such that
   \begin{equation}
    \|v\|_V \leq C \|p\|_\Pi
   \end{equation}
@@ -92,4 +92,6 @@
    b(u,\bar{q}) = \int_\Omega \nabla \cdot u q \,d\Omega = \int_{\partial \Omega} q u \cdot n d\Gamma = 0
   \end{equation}
   since $u$ is homogeneous.
+  \bibliographystyle{plain}
+ \bibliography{references.bib}
 \end{document}
